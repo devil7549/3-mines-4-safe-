@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GHOP GHOP $ — 1win Mines VIP Predictor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #101b33 0%, #070b14 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(17, 26, 46, 0.92);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      border-radius: 22px;
+      padding: 22px 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 180, 255, 0.15);
+      text-align: center;
+    }
+
+    /* Top Banner */
+    .top-banner {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, #ffffff, #7dd3fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+
+    /* Locked Strategy Badge */
+    .strategy-box {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 15px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-top: 2px;
+    }
+
+    .stat-value.green {
+      color: #4ade80;
+    }
+
+    .divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(148, 163, 184, 0.2);
+    }
+
+    /* 5x5 Mines Grid */
+    .grid-wrapper {
+      background: #0b1221;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 18px;
+      box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    .mines-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 9px;
+    }
+
+    .tile {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      box-shadow: 0 5px 0 #060a12;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      user-select: none;
+    }
+
+    .tile.safe {
+      background: linear-gradient(145deg, #f59e0b, #d97706);
+      border-color: #fde68a;
+      box-shadow: 0 5px 0 #92400e, 0 0 18px rgba(245, 158, 11, 0.65);
+      transform: scale(1.04);
+    }
+
+    .tile.safe::after {
+      content: "⭐";
+      font-size: 24px;
+      animation: popIn 0.3s ease forwards;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      margin-bottom: 10px;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(0, 114, 255, 0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.9);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      font-size: 13px;
+      padding: 10px;
+    }
+
+    .btn-register {
+      display: block;
+      text-decoration: none;
+      background: linear-gradient(90deg, #10b981, #059669);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+      margin-top: 6px;
+    }
+
+    /* Promo Card */
+    .promo-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px dashed rgba(56, 189, 248, 0.4);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .promo-code {
+      font-weight: 900;
+      color: #fde047;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+
+    .copy-btn {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Lock Screen */
+    #lockScreen input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: #0b1221;
+      color: #ffffff;
+      font-size: 15px;
+      text-align: center;
+      margin: 14px 0;
+      outline: none;
+    }
+
+    #lockScreen input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    }
+
+    .error-msg {
+      color: #f87171;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .status-text {
+      font-size: 12px;
+      color: #4ade80;
+      min-height: 18px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-banner">1WIN GHOP GHOP $</div>
+    <h1>MINES VIP PREDICTOR</h1>
+    <p class="subtitle">AI Safe-Tile Grid Scanner • 90%+ Accuracy</p>
+
+    <!-- LOCK SCREEN -->
+    <div id="lockScreen">
+      <div class="strategy-box">
+        <div class="stat">
+          <div class="stat-label">Mines</div>
+          <div class="stat-value">3 Mines</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-label">Target</div>
+          <div class="stat-value green">4 Safe Tiles</div>
+        </div>
+      </div>
+
+      <p style="font-size: 13px; color: #cbd5e1;">Enter your VIP Access Key to unlock signals:</p>
+      <input type="password" id="accessKeyInput" placeholder="Enter VIP Key..." />
+      <div class="error-msg" id="errorMsg">Invalid Key! Contact @BlackOps_77 after registration.</div>
+      <button class="btn btn-primary" onclick="unlockBot()">UNLOCK BOT</button>
+
+      <a href="https://1wxnxg.life/?open=register&p=4w73u" target="_blank" class="btn btn-register">
+        REGISTER 1WIN (500% BONUS)
+      </a>
+
+      <div class="promo-card">
+        <span>Promo Code: <span class="promo-code">1w_57063</span></span>
+        <button class="copy-btn" onclick="copyPromo(this)">COPY</button>
+      </div>
+    </div>
+
+    <!-- MAIN BOT INTERFACE -->
+    <div id="botScreen" class="hidden">
+      <div class="strategy-box">
+        <div class="stat">
+          <div class="stat-label">Locked Mode</div>
+          <div class="stat-value">3 Mines</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-label">Safe Strategy</div>
+          <div class="stat-value green">4 Safe Tiles</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-label">Accuracy</div>
+          <div class="stat-value">90%+</div>
+        </div>
+      </div>
+
+      <div class="status-text" id="statusText">Ready — Set 3 Mines in 1win & tap Get Signal</div>
+
+      <div class="grid-wrapper">
+        <div class="mines-grid" id="minesGrid"></div>
+      </div>
+
+      <button class="btn btn-primary" id="signalBtn" onclick="generateSignal()">GET SIGNAL (4 SAFE TILES)</button>
+      <button class="btn btn-secondary" onclick="resetGrid()">RESET GRID</button>
+
+      <div class="promo-card">
+        <span>Promo Code: <span class="promo-code">1w_57063</span></span>
+        <button class="copy-btn" onclick="copyPromo(this)">COPY</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const VALID_KEY = "Futurepro";
+    const TOTAL_TILES = 25;
+    const SAFE_TILES_COUNT = 4; // Locked to 4 safe tiles for 3 mines strategy
+
+    const gridEl = document.getElementById("minesGrid");
+    const statusText = document.getElementById("statusText");
+    const signalBtn = document.getElementById("signalBtn");
+
+    // Build 5x5 grid
+    function initGrid() {
+      gridEl.innerHTML = "";
+      for (let i = 0; i < TOTAL_TILES; i++) {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        gridEl.appendChild(tile);
+      }
+    }
+
+    function unlockBot() {
+      const input = document.getElementById("accessKeyInput").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (input === VALID_KEY) {
+        errorMsg.style.display = "none";
+        document.getElementById("lockScreen").classList.add("hidden");
+        document.getElementById("botScreen").classList.remove("hidden");
+        initGrid();
+      } else {
+        errorMsg.style.display = "block";
+      }
+    }
+
+    // Allow Enter key on password input
+    document.getElementById("accessKeyInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") unlockBot();
+    });
+
+    function resetGrid() {
+      const tiles = document.querySelectorAll(".tile");
+      tiles.forEach(tile => tile.classList.remove("safe"));
+      statusText.textContent = "Grid Cleared — Ready for Next Round";
+    }
+
+    function generateSignal() {
+      signalBtn.disabled = true;
+      signalBtn.style.opacity = "0.7";
+      statusText.textContent = "Scanning 3-Mines Hash Seed...";
+
+      const tiles = document.querySelectorAll(".tile");
+      tiles.forEach(tile => tile.classList.remove("safe"));
+
+      setTimeout(() => {
+        const pickedIndices = new Set();
+        while (pickedIndices.size < SAFE_TILES_COUNT) {
+          const randIndex = Math.floor(Math.random() * TOTAL_TILES);
+          pickedIndices.add(randIndex);
+        }
+
+        const indicesArray = Array.from(pickedIndices);
+        indicesArray.forEach((idx, step) => {
+          setTimeout(() => {
+            tiles[idx].classList.add("safe");
+          }, step * 140);
+        });
+
+        setTimeout(() => {
+          statusText.textContent = "✅ 4 Safe Tiles Found! Open & Cash Out Safely.";
+          signalBtn.disabled = false;
+          signalBtn.style.opacity = "1";
+        }, SAFE_TILES_COUNT * 140 + 50);
+      }, 450);
+    }
+
+    function copyPromo(btn) {
+      navigator.clipboard.writeText("1w_57063");
+      const oldText = btn.textContent;
+      btn.textContent = "COPIED!";
+      btn.style.color = "#4ade80";
+      setTimeout(() => {
+        btn.textContent = oldText;
+        btn.style.color = "#38bdf8";
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
